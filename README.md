@@ -20,3 +20,17 @@ A web application for tracking food intake and calories using machine learning f
 ```bash
 git clone <repository-url>
 cd Calories
+
+## Project Screenshots
+
+### 🖼️ Layout Overview
+![Overall Layout](images/overall.png)
+
+### 🧪 Inputting New Data
+![Testing New Input](images/testing.png)
+
+### 📊 Results After Entering New Data
+![Prediction Results](images/results.png)
+
+### ➕ New Data Loaded View
+![New Data Loaded](images/new.png)
