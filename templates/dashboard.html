@@ -1,0 +1,395 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-4">Food Calorie Tracker</h1>
+
+<div class="row">
+    <!-- Food Items Table -->
+    <div class="col-md-8 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Track Your Food Items</h5>
+                <button id="addFoodRow" class="btn btn-sm btn-light">
+                    <i class="bi bi-plus-lg"></i> Add Row
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="foodItemsTable">
+                        <thead>
+                            <tr>
+                                <th>Food Item</th>
+                                <th>Category</th>
+                                <th>Calories</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Initial empty row -->
+                            <tr class="food-row">
+                                <td>
+                                    <input type="text" class="form-control food-name" placeholder="Enter food name">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control category" readonly>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control calories" readonly>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-danger delete-row">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-3 p-3 bg-light rounded">
+                    <h5 class="d-flex justify-content-between align-items-center">
+                        <span>Total Calories:</span>
+                        <span id="totalCalories" class="badge bg-primary">0 kcal</span>
+                    </h5>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fun Food Image and Description Section -->
+        <div class="card mt-4">
+            <div class="card-body text-center">
+                <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
+                     class="img-fluid rounded mb-3" 
+                     alt="Colorful healthy food collage"
+                     style="max-height: 300px; object-fit: cover;">
+                
+                <div class="px-3">
+                    <h3 class="text-primary">🍏 Welcome to Your Food Adventure! 🍕</h3>
+                    <div class="row text-start mt-3">
+                        <div class="col-md-6">
+                            <div class="p-3 mb-3 bg-light rounded">
+                                <h5><i class="bi bi-search me-2"></i> <strong>Track Like a Food Detective</strong></h5>
+                                <p>Every bite tells a story! Use our tracker to uncover the nutritional secrets of your meals. Did you know an apple averages 95 calories while a donut... well, let's just say it's more of a "sometimes food"?</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 mb-3 bg-light rounded">
+                                <h5><i class="bi bi-lightbulb me-2"></i> <strong>Predict Like a Nutrition Wizard</strong></h5>
+                                <p>Our calorie crystal ball (okay, advanced algorithm) can estimate calories from nutrients. Perfect for when you're eating mystery leftovers or your grandma's secret recipe!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-info mt-2">
+                        <i class="bi bi-emoji-smile me-2"></i> 
+                        <strong>Pro Tip:</strong> Balance is key! A pizza today? Maybe some extra veggies tomorrow. This isn't diet jail - it's food freedom with knowledge!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calorie Prediction Card -->
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Calorie Prediction</h5>
+            </div>
+            <div class="card-body">
+                <form id="predictionForm">
+                    <div class="mb-3">
+                        <label class="form-label">Food Name</label>
+                        <input type="text" class="form-control" name="food_name" placeholder="Enter food name">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Protein (g)</label>
+                        <input type="number" class="form-control" name="Protein (g)" step="0.1" min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Carbohydrates (g)</label>
+                        <input type="number" class="form-control" name="Carbohydrates (g)" step="0.1" min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Fat (g)</label>
+                        <input type="number" class="form-control" name="Fat (g)" step="0.1" min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Fiber (g)</label>
+                        <input type="number" class="form-control" name="Fiber (g)" step="0.1" min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Sugars (g)</label>
+                        <input type="number" class="form-control" name="Sugars (g)" step="0.1" min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Sodium (mg)</label>
+                        <input type="number" class="form-control" name="Sodium (mg)" min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Cholesterol (mg)</label>
+                        <input type="number" class="form-control" name="Cholesterol (mg)" min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Predicted Calories:</label>
+                        <input type="text" class="form-control" id="predictedCaloriesInput" readonly>
+                    </div>
+                    <button type="button" id="predictButton" class="btn btn-primary w-100">
+                        Calculate Calories
+                    </button>
+                </form>
+                <div id="predictionResult" class="mt-3 p-3 bg-light rounded" style="display: none;">
+                    <h5 class="d-flex justify-content-between align-items-center">
+                        <span>Predicted Calories for <span id="predictedFoodName" class="fst-italic">Custom food</span>:</span>
+                        <span id="predictedCalories" class="badge bg-success">0 kcal</span>
+                    </h5>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fun Fact Card -->
+        <div class="card mt-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="bi bi-stars me-2"></i> Did You Know?</h5>
+            </div>
+            <div class="card-body">
+                <p id="funFact">Loading fun food fact...</p>
+                <button id="newFactBtn" class="btn btn-sm btn-outline-success w-100">
+                    <i class="bi bi-arrow-repeat"></i> Get Another Fact
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Fun Facts Generator
+    const foodFacts = [
+        "Avocados are berries, but strawberries aren't!",
+        "The world's most expensive pizza costs $12,000 (with gold flakes!)",
+        "Honey never spoils - archaeologists have found edible honey in ancient Egyptian tombs!",
+        "Bananas are slightly radioactive due to their potassium content (but perfectly safe!)",
+        "Almonds are members of the peach family",
+        "The average person eats about 35 tons of food in their lifetime",
+        "Carrots were originally purple, not orange",
+        "Pineapples take 2-3 years to grow",
+        "White chocolate isn't technically chocolate as it contains no cocoa solids",
+        "Apples float because they're 25% air"
+    ];
+    
+    function showRandomFact() {
+        const randomFact = foodFacts[Math.floor(Math.random() * foodFacts.length)];
+        document.getElementById('funFact').textContent = randomFact;
+    }
+    
+    // Initial fact
+    showRandomFact();
+    
+    // New fact button
+    document.getElementById('newFactBtn').addEventListener('click', showRandomFact);
+
+    // Add event listeners to initial row
+    const initialRow = document.querySelector('.food-row');
+    addRowEventListeners(initialRow);
+
+    // Add new row
+    document.getElementById('addFoodRow').addEventListener('click', function() {
+        const tbody = document.querySelector('#foodItemsTable tbody');
+        const newRow = document.createElement('tr');
+        newRow.className = 'food-row';
+        newRow.innerHTML = `
+            <td>
+                <input type="text" class="form-control food-name" placeholder="Enter food name">
+            </td>
+            <td>
+                <input type="text" class="form-control category" readonly>
+            </td>
+            <td>
+                <input type="text" class="form-control calories" readonly>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-outline-danger delete-row">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </td>
+        `;
+        tbody.appendChild(newRow);
+        
+        // Add event listeners to the new row
+        addRowEventListeners(newRow);
+    });
+
+    // Add event listeners to a row
+    function addRowEventListeners(row) {
+        // Food name input event
+        const foodNameInput = row.querySelector('.food-name');
+        foodNameInput.addEventListener('input', debounce(function() {
+            const foodName = this.value.trim();
+            if (foodName.length > 2) {
+                fetchFoodData(foodName, row);
+            } else {
+                // Clear the row if input is too short or empty
+                row.querySelector('.category').value = '';
+                row.querySelector('.calories').value = '';
+                updateTotalCalories();
+            }
+        }, 500));
+
+        // Delete button event
+        const deleteBtn = row.querySelector('.delete-row');
+        deleteBtn.addEventListener('click', function() {
+            row.remove();
+            updateTotalCalories();
+        });
+    }
+
+    async function fetchFoodData(foodName, row) {
+        const nameInput = row.querySelector('.food-name');
+        const categoryInput = row.querySelector('.category');
+        const caloriesInput = row.querySelector('.calories');
+        
+        // Show loading state
+        categoryInput.value = 'Searching...';
+        caloriesInput.value = '...';
+        
+        if (!foodName || foodName.length < 2) {
+            categoryInput.value = '';
+            caloriesInput.value = '';
+            return;
+        }
+        
+        try {
+            const response = await fetch(`/api/search_food?query=${encodeURIComponent(foodName)}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const result = await response.json();
+            console.log('Search result:', result);
+            
+            if (result.status === 'success') {
+                nameInput.value = result.data.food_name;
+                categoryInput.value = result.data.category;
+                caloriesInput.value = Math.round(result.data.calories);
+            } else {
+                categoryInput.value = result.message || 'Not found';
+                caloriesInput.value = '0';
+            }
+        } catch (error) {
+            console.error('Fetch error:', error);
+            categoryInput.value = 'Error';
+            caloriesInput.value = '0';
+        } finally {
+            updateTotalCalories();
+        }
+    }
+
+    // Update total calories
+    function updateTotalCalories() {
+        let total = 0;
+        document.querySelectorAll('.food-row').forEach(row => {
+            const caloriesInput = row.querySelector('.calories');
+            if (caloriesInput && caloriesInput.value) {
+                total += parseFloat(caloriesInput.value) || 0;
+            }
+        });
+        document.getElementById('totalCalories').textContent = `${total} kcal`;
+    }
+
+    // Add event listeners for prediction inputs
+    const predictionInputs = document.querySelectorAll('#predictionForm input[type="number"]');
+    predictionInputs.forEach(input => {
+        input.addEventListener('input', debounce(calculatePrediction, 500));
+    });
+
+    // Calculate prediction function
+    function calculatePrediction() {
+        const formData = new FormData(document.getElementById('predictionForm'));
+        const nutritionData = {};
+        formData.forEach((value, key) => {
+            if (value) {
+                nutritionData[key] = parseFloat(value);
+            }
+        });
+
+        // Only calculate if we have the required fields
+        if (nutritionData['Protein (g)'] && nutritionData['Carbohydrates (g)'] && nutritionData['Fat (g)']) {
+            // Call the prediction API
+            fetch('/api/predict_calories', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(nutritionData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.predicted_calories) {
+                    const predictedCalories = Math.round(data.predicted_calories);
+                    document.getElementById('predictedCaloriesInput').value = `${predictedCalories} kcal`;
+                    document.getElementById('predictedCalories').textContent = `${predictedCalories} kcal`;
+                    document.getElementById('predictedFoodName').textContent = 
+                        document.querySelector('input[name="food_name"]').value || 'Custom food';
+                    document.getElementById('predictionResult').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Prediction error:', error);
+                alert('Error predicting calories. Please try again.');
+            });
+        }
+    }
+
+    // Prediction button click handler
+    document.getElementById('predictButton').addEventListener('click', calculatePrediction);
+
+    // Debounce function
+    function debounce(func, wait) {
+        let timeout;
+        return function() {
+            const context = this;
+            const args = arguments;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                func.apply(context, args);
+            }, wait);
+        };
+    }
+});
+</script>
+
+<style>
+.food-row td {
+    vertical-align: middle;
+}
+
+.delete-row {
+    padding: 0.25rem 0.5rem;
+}
+
+#totalCalories, #predictedCalories {
+    font-size: 1.25rem;
+    padding: 0.5rem 1rem;
+}
+
+.category, .calories {
+    background-color: #f8f9fa;
+}
+
+#funFact {
+    font-style: italic;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.card-header h5 {
+    display: flex;
+    align-items: center;
+}
+</style>
+{% endblock %}
