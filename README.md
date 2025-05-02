@@ -4,33 +4,40 @@ A web application for tracking food intake and calories using machine learning f
 
 ## Features
 
-- User authentication (login/register)
-- Food search with calorie prediction
-- Food logging and tracking
-- Dashboard with daily calorie summary
+- ✅ User authentication (login/register)
+- 🔍 Food search with calorie prediction
+- 📝 Food logging and tracking
+- 📊 Dashboard with daily calorie summary
 
 ## Prerequisites
 
-- Docker and Docker Compose
-- Python 3.8+ (for local development)
+- 🐳 Docker and Docker Compose
+- 🐍 Python 3.8+ (for local development)
 
 ## Setup
 
-1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd Calories
+# Clone the repository
+git clone https://github.com/jodawa123/Calorie_Count.git
+cd Calorie_Count
 
-## Project Screenshots
+# Start the application (using Docker)
+docker-compose up --build
+Project Screenshots
+Feature	Preview
+Main Dashboard	Dashboard
+Add New Food	Add Food
+Prediction Results	Results
+Data Visualization	Visualization
+Development
+bash
+# Set up virtual environment
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate  # Windows
 
-### 🖼️ Layout Overview
-![Overall Layout](https://github.com/jodawa123/Calorie_Count/raw/master/images/overall.png)
+# Install dependencies
+pip install -r requirements.txt
 
-### 🧪 Inputting New Data
-![Testing New Input](https://github.com/jodawa123/Calorie_Count/raw/master/images/testing.png)
-
-### 📊 Results After Entering New Data
-![Prediction Results](https://github.com/jodawa123/Calorie_Count/raw/master/images/results.png)
-
-### ➕ New Data Loaded View
-![New Data Loaded](https://github.com/jodawa123/Calorie_Count/raw/master/images/new.png)
+# Run the application
+flask run
