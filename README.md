@@ -35,17 +35,17 @@ cd Calorie_Count
 ### 4. Data View
 <img src="https://raw.githubusercontent.com/jodawa123/Calorie_Count/master/images/new.png" width="600" alt="Data View">
 
-# Start the application (using Docker)
+## Start the application (using Docker)
 docker-compose up --build
 
 
-# Set up virtual environment
+## Set up virtual environment
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate  # Windows
 
-# Install dependencies
+## Install dependencies
 pip install -r requirements.txt
 
-# Run the application
+## Run the application
 flask run
