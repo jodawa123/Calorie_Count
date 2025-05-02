@@ -16,7 +16,7 @@ A web application for tracking food intake and calories using machine learning f
 
 ## Setup
 
-```bash
+
 # Clone the repository
 git clone https://github.com/jodawa123/Calorie_Count.git
 cd Calorie_Count
