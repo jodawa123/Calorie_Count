@@ -24,13 +24,13 @@ cd Calories
 ## Project Screenshots
 
 ### 🖼️ Layout Overview
-![Overall Layout](images/overall.png)
+![Overall Layout](https://github.com/jodawa123/Calorie_Count/raw/master/images/overall.png)
 
 ### 🧪 Inputting New Data
-![Testing New Input](images/testing.png)
+![Testing New Input](https://github.com/jodawa123/Calorie_Count/raw/master/images/testing.png)
 
 ### 📊 Results After Entering New Data
-![Prediction Results](images/results.png)
+![Prediction Results](https://github.com/jodawa123/Calorie_Count/raw/master/images/results.png)
 
 ### ➕ New Data Loaded View
-![New Data Loaded](images/new.png)
+![New Data Loaded](https://github.com/jodawa123/Calorie_Count/raw/master/images/new.png)
