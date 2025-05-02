@@ -24,27 +24,22 @@ cd Calorie_Count
 ## Screenshots
 
 ### 1. Main Interface
-<img src="https://raw.githubusercontent.com/jodawa123/Calorie_Count/master/images/overall.png" width="600">
+<img src="https://raw.githubusercontent.com/jodawa123/Calorie_Count/master/images/overall.png" width="600" alt="Main Interface">
 
 ### 2. Adding Food
-<img src="https://raw.githubusercontent.com/jodawa123/Calorie_Count/master/images/testing.png" width="600">
+<img src="https://raw.githubusercontent.com/jodawa123/Calorie_Count/master/images/testing.png" width="600" alt="Adding Food">
 
 ### 3. Results
-<img src="https://raw.githubusercontent.com/jodawa123/Calorie_Count/master/images/results.png" width="600">
+<img src="https://raw.githubusercontent.com/jodawa123/Calorie_Count/master/images/results.png" width="600" alt="Results">
 
 ### 4. Data View
-<img src="https://raw.githubusercontent.com/jodawa123/Calorie_Count/master/images/new.png" width="600">
+<img src="https://raw.githubusercontent.com/jodawa123/Calorie_Count/master/images/new.png" width="600" alt="Data View">
 
 # Start the application (using Docker)
 docker-compose up --build
-Project Screenshots
-Feature	Preview
-Main Dashboard	Dashboard
-Add New Food	Add Food
-Prediction Results	Results
-Data Visualization	Visualization
-Development
-bash
+
+
+#bash
 # Set up virtual environment
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
