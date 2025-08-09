@@ -1,5 +1,7 @@
 __pycache__/
 logs/
-models/
+models/__pycache__/
+models/*.joblib
+models/*.joblib1
 venv/
 database.db

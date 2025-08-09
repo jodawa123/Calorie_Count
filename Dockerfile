@@ -28,9 +28,6 @@ ENV PYTHONPATH=/app
 # Create necessary directories
 RUN mkdir -p data logs
 
-# Debug: List directory contents to ensure files are copied
-RUN ls -la /app && ls -la /app/models
-
 # Initialize database
 RUN python -c "from database import init_db; init_db()"
 
