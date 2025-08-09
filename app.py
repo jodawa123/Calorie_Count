@@ -14,10 +14,8 @@ from models.user import User
 from models.food_data import FoodData  # Import the FoodData class for calorie prediction
 from flask_cors import CORS
 
-
-# Initialize Flask application
-sys.path.insert(0, str(Path(__file__).parent.parent))
-from Calories import create_app
+# Import create_app from the current directory
+from __init__ import create_app
 
 app = create_app()
 CORS(app)  # Enable Cross-Origin Resource Sharing for API endpoints
