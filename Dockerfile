@@ -1,14 +1,13 @@
-# Use Python 3.10 as base image
-FROM python:3.10-alpine
+# Use Python 3.11 as base image
+FROM python:3.11-slim
 
 # Set working directory
 WORKDIR /app
 
 # Install system dependencies
-RUN apk add --no-cache \
+RUN apt-get update && apt-get install -y \
     gcc \
-    musl-dev \
-    python3-dev
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first to leverage Docker cache
 COPY requirements.txt .
@@ -28,5 +27,5 @@ RUN python -c "from database import init_db; init_db()"
 # Expose port
 EXPOSE 5000
 
-# Run the application
-CMD ["python", "run.py"] 
+# Run the application with gunicorn for production
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"] 
